@@ -1,13 +1,16 @@
 import { TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
+import { Strings } from 'src/strings/strings'
 
 import { AppComponent } from './app.component'
+import { MainComponent } from './main/main/main.component'
+import { NavigationComponent } from './main/navigation/navigation.component'
 
 describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [RouterTestingModule],
-            declarations: [AppComponent],
+            declarations: [AppComponent, MainComponent, NavigationComponent],
         }).compileComponents()
     })
 
@@ -23,12 +26,12 @@ describe('AppComponent', () => {
         expect(app.title).toEqual('item-notes-angular')
     })
 
-    it('should render title', () => {
+    it('should render navigation', () => {
         const fixture = TestBed.createComponent(AppComponent)
         fixture.detectChanges()
         const compiled = fixture.nativeElement
-        expect(compiled.querySelector('.content span').textContent).toContain(
-            'item-notes-angular app is running!',
-        )
+        expect(
+            compiled.querySelector('nav ul li:first-child').textContent,
+        ).toContain(Strings.ScreenNameView)
     })
 })
