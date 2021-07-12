@@ -17,7 +17,12 @@ describe('DatabaseService', () => {
 
     it('should update isOpen if open succeeds', (done) => {
         // Spy to trigger success event for indexedDB.open()
-        const openReq = new EventTarget() as IDBOpenDBRequest
+        interface TempOpenReq extends EventTarget {
+            result?: { onclose?: () => void }
+        }
+        const tempOpenReq: TempOpenReq = new EventTarget()
+        tempOpenReq.result = {}
+        const openReq = tempOpenReq as unknown as IDBOpenDBRequest
         spyOn(window.indexedDB, 'open').and.returnValue(openReq)
         // Spy subscriber to isOpen
         const subscriber = jasmine.createSpy()

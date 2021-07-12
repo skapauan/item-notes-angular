@@ -22,6 +22,10 @@ export class DatabaseService {
         )
         openReq.onsuccess = () => {
             this.db = openReq.result
+            this.db.onclose = () => {
+                this.isOpen.next(false)
+                this.db = undefined
+            }
             this.isOpen.next(true)
         }
         openReq.onerror = () => {
