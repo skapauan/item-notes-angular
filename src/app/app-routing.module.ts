@@ -8,11 +8,12 @@ import { SettingsScreenComponent } from './settings/settings-screen/settings-scr
 import { ViewScreenComponent } from './view/view-screen/view-screen.component'
 
 const routes: Routes = [
+    { path: 'view', component: ViewScreenComponent },
     { path: 'fields', component: FieldsScreenComponent },
     { path: 'save', component: SaveScreenComponent },
     { path: 'open', component: OpenScreenComponent },
     { path: 'settings', component: SettingsScreenComponent },
-    { path: '**', component: ViewScreenComponent },
+    { path: '**', redirectTo: '/view', pathMatch: 'full' },
 ]
 
 @NgModule({
